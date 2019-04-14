@@ -1,0 +1,68 @@
+﻿@model PageViewModel
+
+@{
+    ViewData["Title"] = "События";
+}
+
+<h1>События</h1>
+
+<p>
+    <a href="/events/Create" >Создать событие</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название события
+            </th>
+            <th>
+                Описание события
+            </th>
+            <th>
+                Дата события
+            </th>
+            <th>
+                Время события
+            </th>
+            <th>
+                <center> Клиенты</center>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Items) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameEvent)
+            </td>
+            <td>
+                @item.DesctiptionEvent
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DurationDateEvent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DurationTimeEvent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.LastName)
+                @Html.DisplayFor(modelItem => item.Client.FirstName)
+                @Html.DisplayFor(modelItem => item.Client.Patronymic)
+                @Html.DisplayFor(modelItem => item.Client.IdendificationNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Описание</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@for(int i = 0; i < Model.PageCount; i++)
+{
+    <a class="page-item" asp-action="Index" asp-route-page="@(i+1)">@(i + 1)</a>
+}

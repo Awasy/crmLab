@@ -1,0 +1,53 @@
+﻿@model appLab.Models.Event
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Event</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="NameEvent" class="control-label"></label>
+                <input asp-for="NameEvent" class="form-control" />
+                <span asp-validation-for="NameEvent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DesctiptionEvent" class="control-label"></label>
+                <textarea id="DesctiptionEvent" name="DesctiptionEvent" rows="10" cols="45" class="form-group">@Model.DesctiptionEvent</textarea>
+                <span asp-validation-for="DesctiptionEvent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DurationDateEvent" class="control-label"></label>
+                <input asp-for="DurationDateEvent" class="form-control" />
+                <span asp-validation-for="DurationDateEvent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DurationTimeEvent" class="control-label"></label>
+                <input asp-for="DurationTimeEvent" class="form-control" />
+                <span asp-validation-for="DurationTimeEvent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DropDownList("clientId", ViewData["DropDownList"] as List<SelectListItem>)
+                @Html.ValidationMessageFor(model => model.Client)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
